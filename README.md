@@ -1,6 +1,8 @@
 Crypt Keeper
 ============
 
+![](http://vignette2.wikia.nocookie.net/uncyclopedia/images/c/c4/CryptKeeper.gif/revision/latest?cb=20100602135927)
+
 A very simple tool for managing encrypted secrets stored in Redis.
 
 Installation
@@ -26,7 +28,7 @@ $ keyczart addkey --location=/etc/crypt-keeper --status=primary --size=256
 $ chmod 0600 /etc/crypt-keeper/*
 ```
 
-Run these commands as a privileged use and make sure no other users have read or
+Run these commands as a privileged user and make sure no other users have read or
 write access to the files within your key directory. CryptKeeper will look in
 `/etc/crypt-keeper` by default, but you can put your keys anywhere and run
 `crypt-keeper` with the `--dir=DIRECTORY` option.
