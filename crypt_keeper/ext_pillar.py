@@ -33,4 +33,4 @@ def ext_pillar_exec(minion_id, pillar, *args, **kwargs):
             data_part[key] = val
 
     log.debug("Finalized crypt pillar data for minion %s: %s", minion_id, pillar_data)
-    return pillar_data
+    return {"crypt": pillar_data}
