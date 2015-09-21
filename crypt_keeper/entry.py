@@ -38,7 +38,7 @@ class Entry(object):
     @staticmethod
     def list_keys():
         keys = Entry.keys()
-        if len(keys()) == 0:
+        if len(keys) == 0:
             print("No keys found", file=sys.stderr)
             return 1
         else:
