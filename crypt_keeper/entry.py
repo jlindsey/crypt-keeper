@@ -17,10 +17,9 @@ class Entry(object):
 
     def __init__(self, key=None, crypt_dir=None):
         self.redis = redis.Redis(host="localhost", port="6379", db=0)
-        if key is not None:
-            self.key = "%s:%s" % (__key_namespace__, key)
-            self.crypter = Crypter(crypt_dir)
-            self._fetch()
+        self.key = "%s:%s" % (__key_namespace__, key)
+        self.crypter = Crypter(crypt_dir)
+        self._fetch()
 
     def _fetch(self):
         val = self.redis.get(self.key)
@@ -31,8 +30,10 @@ class Entry(object):
         print("Saving to `%s'" % self.key)
         return self.redis.set(self.key, self.crypter.encrypt(self.value))
 
-    def list_keys(self):
-        keys = self.redis.keys("%s:*" % __key_namespace__)
+    @staticmethod
+    def list_keys():
+        r = redis.Redis(host="localhost", port="6379", db=0)
+        keys = r.keys("%s:*" % __key_namespace__)
         if len(keys) == 0:
             print("No keys found", file=sys.stderr)
             return 1

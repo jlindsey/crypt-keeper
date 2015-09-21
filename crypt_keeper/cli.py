@@ -26,7 +26,7 @@ def _handle_list(args):
 
 
 def _handle_list_keys(args):
-    return _fetch_entry(args).list_keys()
+    return Entry.list_keys()
 
 
 def _handle_edit(args):
