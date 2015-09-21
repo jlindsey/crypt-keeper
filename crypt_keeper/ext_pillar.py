@@ -12,7 +12,7 @@ def ext_pillar_exec(minion_id, pillar, *args, **kwargs):
 
     for key in Entry.keys():
         log.debug("Fetching crypt key %s", key)
-        entry = Entry(key)
+        entry = Entry(key=key)
 
         if "__minions__" in entry.value.keys():
             log.debug("Performing __minions__ check for key %s on minion %s", key, minion_id)
@@ -26,7 +26,7 @@ def ext_pillar_exec(minion_id, pillar, *args, **kwargs):
 
         data_part = pillar_data
         for key_part in key.split(":"):
-            data_part.setdefault({})
+            data_part.setdefault(key_part, {})
             data_part = data_part[key_part]
 
         for key, val in entry.value.iteritems():

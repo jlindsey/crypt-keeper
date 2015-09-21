@@ -36,7 +36,7 @@ class Entry(object):
     @staticmethod
     def keys():
         r = redis.Redis(host="localhost", port="6379", db=0)
-        return r.keys("{}:*".format(__key_namespace__))
+        return [key.replace("{}:".format(__key_namespace__), "") for key in r.keys("{}:*".format(__key_namespace__))]
 
     @staticmethod
     def list_keys():
@@ -45,7 +45,7 @@ class Entry(object):
             print("No keys found", file=sys.stderr)
             return 1
         else:
-            print("\n".join([key.replace("{}:".format(__key_namespace__), "") for key in keys]))
+            print("\n".join(keys))
         return 0
 
     def edit(self):
