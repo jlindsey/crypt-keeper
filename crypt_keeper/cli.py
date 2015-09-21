@@ -3,7 +3,7 @@ import sys
 import argparse
 from crypt_keeper.entry import Entry
 
-__allowed_commands__ = ["list", "list-keys", "edit", "delete"]
+__allowed_commands__ = ["show", "list", "edit", "delete"]
 
 
 def _parse_args():
@@ -21,11 +21,11 @@ def _fetch_entry(args):
     return Entry(key=args.key, crypt_dir=args.dir)
 
 
-def _handle_list(args):
+def _handle_show(args):
     return _fetch_entry(args).view()
 
 
-def _handle_list_keys(args):
+def _handle_list(args):
     return Entry.list_keys()
 
 
@@ -40,7 +40,7 @@ def _handle_delete(args):
 def main():
     commands = {
         "list": _handle_list,
-        "list-keys": _handle_list_keys,
+        "show": _handle_show,
         "edit": _handle_edit,
         "delete": _handle_delete
     }
