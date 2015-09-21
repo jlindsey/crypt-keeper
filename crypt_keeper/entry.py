@@ -18,9 +18,9 @@ class Entry(object):
     def __init__(self, key=None, crypt_dir=None):
         self.redis = redis.Redis(host="localhost", port="6379", db=0)
         if key.find(__key_namespace__) == 0:
-            self.key = "{}:{}".format(__key_namespace__, key)
-        else:
             self.key = key
+        else:
+            self.key = "{}:{}".format(__key_namespace__, key)
         self.crypter = Crypter(crypt_dir)
         self._fetch()
 
