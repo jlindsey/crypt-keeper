@@ -31,10 +31,14 @@ class Entry(object):
         return self.redis.set(self.key, self.crypter.encrypt(self.value))
 
     @staticmethod
-    def list_keys():
+    def keys():
         r = redis.Redis(host="localhost", port="6379", db=0)
-        keys = r.keys("%s:*" % __key_namespace__)
-        if len(keys) == 0:
+        return r.keys("%s:*" % __key_namespace__)
+
+    @staticmethod
+    def list_keys():
+        keys = Entry.keys()
+        if len(keys()) == 0:
             print("No keys found", file=sys.stderr)
             return 1
         else:

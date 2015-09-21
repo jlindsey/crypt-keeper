@@ -10,7 +10,7 @@ def ext_pillar_exec(minion_id, pillar, *args, **kwargs):
     log.info("Fetching crypt data for minion %s", minion_id)
     pillar_data = {}
 
-    for key in Entry.list_keys():
+    for key in Entry.keys():
         log.debug("Fetching crypt key %s", key)
         entry = Entry(key)
 
